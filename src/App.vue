@@ -1,16 +1,14 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-import Dashboard from './components/Dashboard.vue'
 import './assets/tailwind.css'
+
+import Dashboard from './components/Dashboard.vue'
+import SideBar from './components/SideBar/index.vue'
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
+    
+    <SideBar />
   </header>
 
   <main>
