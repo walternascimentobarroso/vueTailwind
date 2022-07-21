@@ -25,7 +25,7 @@ class DAOProducts
   {
     $commands = <<<TABLE
     CREATE TABLE IF NOT EXISTS products (
-        project_id   INTEGER PRIMARY KEY,
+        id   INTEGER PRIMARY KEY,
         sku   VARCHAR (255),
         atributes TEXT
     )
@@ -39,18 +39,32 @@ TABLE;
     }
   }
 
-  public function get()
+  public function getAll()
   {
     $stmt = $this->pdo->query("SELECT * FROM products");
-    $tables = [];
+    $data = [];
     $i = 0;
     while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-      $tables[$i]["sku"] = $row["sku"];
-      $tables[$i]["atributes"] = json_decode($row["atributes"]);
+      $data[$i]["sku"] = $row["sku"];
+      $data[$i]["atributes"] = json_decode($row["atributes"]);
       $i++;
     }
 
-    return $tables;
+    return $data;
+  }
+
+  public function get($id)
+  {
+    $stmt = $this->pdo->prepare("SELECT * FROM products WHERE id = :id");
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+    $data = [];
+    while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
+      $data["sku"] = $row["sku"];
+      $data["atributes"] = json_decode($row["atributes"]);
+    }
+
+    return $data;
   }
 
   public function insert($data)

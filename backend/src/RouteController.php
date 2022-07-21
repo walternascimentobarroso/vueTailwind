@@ -11,7 +11,7 @@ class RouteController
   private $uri;
   private $controller;
 
-  public function __construct($requestMethod)
+  public function __construct($requestMethod, $uri)
   {
     $this->requestMethod = $requestMethod;
     $this->uri = $uri;
@@ -27,8 +27,8 @@ class RouteController
   {
     switch ($this->requestMethod) {
       case "GET":
-        if ($this->userId) {
-          $response = $this->controller->get($this->userId);
+        if ($this->uri[2]) {
+          $response = $this->controller->get($this->uri[2]);
         } else {
           $response = $this->controller->getAll();
         }

@@ -9,7 +9,7 @@ class ProductsController
 {
   public function getAll()
   {
-    $result = (new DAOProducts())->get();
+    $result = (new DAOProducts())->getAll();
     // $result = (new DAOProducts())->createTables();
     $response["status_code_header"] = "HTTP/1.1 200 OK";
     $response["body"] = json_encode($result);
@@ -18,10 +18,7 @@ class ProductsController
 
   public function get($id)
   {
-    $result = $this->personGateway->find($id);
-    if (!$result) {
-      return $this->notFoundResponse();
-    }
+    $result = (new DAOProducts())->get($id);
     $response["status_code_header"] = "HTTP/1.1 200 OK";
     $response["body"] = json_encode($result);
     return $response;
