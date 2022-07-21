@@ -4,5 +4,5 @@ namespace App;
 
 class Config
 {
-  const PATH_TO_SQLITE_FILE = "../db/database.db";
+  const DB_HOST = "../db/database.db";
 }

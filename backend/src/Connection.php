@@ -5,7 +5,7 @@ namespace App;
 /**
  * SQLite connnection
  */
-class SQLiteConnection
+class Connection
 {
   /**
    * PDO instance
