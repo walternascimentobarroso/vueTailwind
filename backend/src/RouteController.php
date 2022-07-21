@@ -37,10 +37,10 @@ class RouteController
         $response = $this->controller->create();
         break;
       case "PUT":
-        $response = $this->controller->update($this->userId);
+        $response = $this->controller->update($this->uri[2]);
         break;
       case "DELETE":
-        $response = $this->controller->delete($this->userId);
+        $response = $this->controller->delete($this->uri[2]);
         break;
       default:
         $response = $this->notFoundResponse();

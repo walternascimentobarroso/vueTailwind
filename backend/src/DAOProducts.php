@@ -76,4 +76,24 @@ TABLE;
     $stmt->execute();
     return $this->pdo->lastInsertId();
   }
+
+  public function update($id, $data)
+  {
+    $sql =
+      "UPDATE products SET sku = :sku, atributes = :atributes WHERE id = :id";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindValue(":id", $id);
+    $stmt->bindValue(":sku", $data["sku"]);
+    $stmt->bindValue(":atributes", json_encode($data["atributes"]));
+
+    return $stmt->execute();
+  }
+
+  public function delete($id)
+  {
+    $sql = "DELETE FROM products WHERE id = :id";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->execute([":id" => $id]);
+    return $stmt->rowCount();
+  }
 }

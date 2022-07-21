@@ -36,15 +36,8 @@ class ProductsController
 
   public function update($id)
   {
-    $result = $this->personGateway->find($id);
-    if (!$result) {
-      return $this->notFoundResponse();
-    }
-    $input = (array) json_decode(file_get_contents("php://input"), true);
-    if (!$this->validatePerson($input)) {
-      return $this->unprocessableEntityResponse();
-    }
-    $this->personGateway->update($id, $input);
+    $data = (array) json_decode(file_get_contents("php://input"), true);
+    (new DAOProducts())->update($id, $data);
     $response["status_code_header"] = "HTTP/1.1 200 OK";
     $response["body"] = null;
     return $response;
@@ -52,11 +45,7 @@ class ProductsController
 
   public function delete($id)
   {
-    $result = $this->personGateway->find($id);
-    if (!$result) {
-      return $this->notFoundResponse();
-    }
-    $this->personGateway->delete($id);
+    (new DAOProducts())->delete($id);
     $response["status_code_header"] = "HTTP/1.1 200 OK";
     $response["body"] = null;
     return $response;
